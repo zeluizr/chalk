@@ -1,35 +1,27 @@
 import chalk from "chalk";
 
-const log = console.log;
+// Simulando a carga de um JSON
+const data = {
+  produtos: [
+    { id: 1, nome: "Teclado Mecânico", preco: 250.0, disponivel: true },
+    { id: 2, nome: "Mouse Gamer", preco: 150.0, disponivel: false },
+    { id: 3, nome: "Monitor LED 24''", preco: 700.0, disponivel: true },
+    { id: 4, nome: "Cabo USB", preco: 25.0, disponivel: true },
+    { id: 5, nome: "Webcam HD", preco: 300.0, disponivel: false },
+  ],
+};
 
-// Combine styled and normal strings
-log(chalk.blue("Hello") + " World" + chalk.red("!"));
+console.log(chalk.bold("Lista de Produtos:\n"));
+data.produtos.forEach((produto) => {
+  let disponibilidade = produto.disponivel
+    ? chalk.green("Disponível")
+    : chalk.red("Indisponível");
 
-// Compose multiple styles using the chainable API
-log(chalk.blue.bgRed.bold("Hello world!"));
-
-// Pass in multiple arguments
-log(chalk.blue("Hello", "World!", "Foo", "bar", "biz", "baz"));
-
-// Nest styles
-log(chalk.red("Hello", chalk.underline.bgBlue("world") + "!"));
-
-// Nest styles of the same type even (color, underline, background)
-log(
-  chalk.green(
-    "I am a green line " +
-      chalk.blue.underline.bold("with a blue substring") +
-      " that becomes green again!"
-  )
-);
-
-// ES2015 template literal
-log(`
-CPU: ${chalk.red("90%")}
-RAM: ${chalk.green("40%")}
-DISK: ${chalk.yellow("70%")}
-`);
-
-// Use RGB colors in terminal emulators that support it.
-log(chalk.rgb(123, 45, 67).underline("Underlined reddish color"));
-log(chalk.hex("#DEADED").bold("Bold gray!"));
+  console.log(
+    chalk.bold(produto.nome) +
+      " - Preço: " +
+      chalk.blue(`R$${produto.preco.toFixed(2)}`) +
+      " - " +
+      disponibilidade
+  );
+});
